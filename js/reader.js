@@ -13,17 +13,23 @@ function initGame(file) {
 
 function addGame(json) {
     const div = document.getElementById("cardZone")
+    var i = 0
 
     json.forEach(game => {
-        div.innerHTML += '<div class="card" onclick="showQuestion()">\
+        div.innerHTML += '<div class="card" onclick="showQuestion(' + i + ')">\
                             <div class="content">' + game.name + '</div>\
                             <div class="type">' + game.type + '</div>\
                         </div>'
+        i++
     });
 }
 
-function showQuestion() {
+function showQuestion(id) {
     const div = document.getElementById("questionZone")
+    const card = document.getElementById("questionInner")
+
+    card.innerHTML = '<div id="questionTitle">' + json[id].name + '</div>\
+                    <div id="questionRule">' + json[id].rules + '</div>'
 
     div.style.top = "0%"
 }

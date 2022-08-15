@@ -13,13 +13,16 @@
     <div id="title">Peipln</div>
 
     <label for="uploadlabel"><i id="upload" class='bx bx-upload'></i></label>
-    <input style="display: none;" type="file" id="uploadlabel" accept=".json,.hero" onchange="initGame(this.files[0])">
+    <input style="display: none;" type="file" id="uploadlabel" accept=".json,.peipln" onchange="initGame(this.files[0])">
 
     <div id="cardZone"></div>
 
     <div id="questionZone">
         <div class="questionBorder" onclick="hideQuestion()"></div>
-        <div id="questionInner">coucou</div>
+        <div id="questionInner">
+            <div id="questionTitle"></div>
+            <div id="questionRule"></div>
+        </div>
     </div>
 
     <div id="playerZone">

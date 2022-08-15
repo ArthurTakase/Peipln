@@ -147,10 +147,30 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 80%;
     height: 80%;
     border-radius: .5rem;
     border: solid #f9844a .3rem;
+}
+
+#questionTitle {
+    color: #f9844a;
+    position: absolute;
+    top: .3rem;
+    font-size: 1.6rem;
+    font-family: 'Pacifico', cursive;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#questionRule {
+    position: absolute;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #upload {
