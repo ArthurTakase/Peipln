@@ -1,0 +1,21 @@
+@media screen and (max-width: 1024px) {
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: .7rem 1rem .7rem 1rem;
+        margin: .3rem;
+        margin-bottom: .8rem;
+        cursor: pointer;
+        transition-duration: .3s;
+        text-align: center;
+        background-color: #f9c74f;
+        border-radius: .5rem;
+        box-shadow: #f9844a 0px 10px 0px 0px;
+        flex: 1 25%;
+        height: 3rem;
+        min-width: 15%;
+        overflow: hidden;
+    }
+}

@@ -39,3 +39,17 @@ function hideQuestion() {
 
     div.style.top = "-100%"
 }
+
+function addPlayer() {
+    var div = document.getElementById("playerZone")
+
+    div.innerHTML += '<div class="player">\
+                        <input type="text" class="name" value="Name" style="font-weight: bold; color: #c45118;">\
+                        <input type="text" class="score" value="0" style="font-size: 20px;">\
+                    </div>'
+}
+
+function removePlayer() {
+    var div = document.getElementById("playerZone")
+    div.removeChild(div.lastChild)
+}

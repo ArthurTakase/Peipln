@@ -1,105 +1,22 @@
 [{
     "name": "Jeu #111111111111111111111111111",
     "type": "Solo",
-    "rules": "loremipsum"
+    "rules": "loremipsum",
+    "content": [{
+            "type": "text",
+            "content": "ceci est la question 1"
+        },
+        {
+            "type": "audio",
+            "content": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        },
+        {
+            "type": "picture",
+            "content": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        }
+    ]
 }, {
     "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #2",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #3dzqdzqdzqdzqdzqdzqd",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
-    "type": "Solo",
-    "rules": "loremipsum"
-}, {
-    "name": "Jeu #4",
     "type": "Solo",
     "rules": "loremipsum"
 }]

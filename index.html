@@ -4,6 +4,7 @@
 <head>
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/queries.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="js/reader.js"></script>
 </head>
@@ -12,8 +13,13 @@
 
     <div id="title">Peipln</div>
 
-    <label for="uploadlabel"><i id="upload" class='bx bx-upload'></i></label>
+    <label for="uploadlabel" title="Charger un jeu"><i id="upload" class='bx bx-upload'></i></label>
     <input style="display: none;" type="file" id="uploadlabel" accept=".json,.peipln" onchange="initGame(this.files[0])">
+
+    <div id="settings">
+        <button class="settings" onclick="addPlayer()" title="Ajouter un joueur">+</button>
+        <button class="settings" onclick="removePlayer()" title="Retirer un joueur">-</button>
+    </div>
 
     <div id="cardZone"></div>
 
@@ -25,12 +31,7 @@
         </div>
     </div>
 
-    <div id="playerZone">
-        <div class="player">
-            <input type="text" class="name" value="Name" style="font-weight: bold; color: #c45118;">
-            <input type="text" class="score" value="0" style="font-size: 20px;">
-        </div>
-    </div>
+    <div id="playerZone"></div>
 
 </body>
 
