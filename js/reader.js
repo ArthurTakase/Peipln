@@ -47,9 +47,25 @@ function addPlayer() {
                         <input type="text" class="name" value="Name" style="font-weight: bold; color: #c45118;">\
                         <input type="text" class="score" value="0" style="font-size: 20px;">\
                     </div>'
+
+    if (div.childElementCount == 1)
+        div.children[0].classList.add("current")
 }
 
 function removePlayer() {
     var div = document.getElementById("playerZone")
+
+    if (div.lastChild.classList.contains("current"))
+        nextPlayer()
     div.removeChild(div.lastChild)
+}
+
+function nextPlayer() {
+    var div = document.getElementById("playerZone")
+    var current = div.getElementsByClassName("current")[0]
+    try { var next = current.nextElementSibling } catch (e) { return }
+    if (next == null)
+        next = div.firstElementChild
+    current.classList.remove("current")
+    next.classList.add("current")
 }

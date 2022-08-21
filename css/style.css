@@ -90,30 +90,20 @@ body {
     /* border: solid pink; */
     background-color: #f9c74f;
     padding: .5rem;
-    border-radius: .5rem .5rem 0 0;
+    border-radius: .8rem .8rem 0 0;
     width: 8rem;
     border: solid #f9844a;
     border-bottom: none;
     /* box-shadow: rgba(0, 0, 0, 0.356) 0px 0px 5px 1px; */
     transition-duration: .3s;
     cursor: pointer;
-    box-shadow: #f9844a 0px 20px 0px 0px;
-    /* animation: append-animate .3s linear; */
+    box-shadow: #f9844a 0px 25px 0px 0px;
 }
 
-@keyframes append-animate {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-}
-
-.player:hover {
-    transform: translateY(-10px);
+.player.current {
+    /* width: 9rem; */
+    /* background-color: #aa8329; */
+    transform: translateY(-15px);
     /* height: 120%; */
     border-radius: .8rem;
 }
