@@ -16,20 +16,25 @@
     <label for="uploadlabel" title="Charger un jeu"><i id="upload" class='bx bx-upload'></i></label>
     <input style="display: none;" type="file" id="uploadlabel" accept=".json,.peipln" onchange="initGame(this.files[0])">
 
-    <div id="settings">
-        <button class="settings" onclick="addPlayer()" title="Ajouter un joueur">+</button>
-        <button class="settings" onclick="removePlayer()" title="Retirer un joueur">-</button>
-        <button class="settings" onclick="nextPlayer()" title="Joueur suivant"><i class='bx bx-right-arrow-alt' ></i></button>
-    </div>
 
-    <div id="cardZone"></div>
+    <div id="cardZone">
+        Veuillez charger un jeu pour commencer
+    </div>
 
     <div id="questionZone">
         <div class="questionBorder" onclick="hideQuestion()"></div>
+        <button id="previous" class="previous slide" onclick="showContent(-1)"><i class='bx bx-left-arrow-alt' ></i></button>
         <div id="questionInner">
             <div id="questionTitle"></div>
             <div id="questionRule"></div>
         </div>
+        <button id="next" class="next slide" onclick="showContent(1)"><i class='bx bx-right-arrow-alt'></i></button>
+    </div>
+
+    <div id="settings">
+        <button class="settings" onclick="addPlayer()">+</button>
+        <button class="settings" onclick="removePlayer()">-</button>
+        <button class="settings" onclick="nextPlayer()"><i class='bx bx-right-arrow-alt' ></i></button>
     </div>
 
     <div id="playerZone"></div>

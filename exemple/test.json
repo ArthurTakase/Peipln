@@ -4,15 +4,18 @@
     "rules": "loremipsum",
     "content": [{
             "type": "text",
-            "content": "ceci est la question 1"
+            "content": "ceci est la question 1",
+            "answer": "ceci est la réponse 1"
         },
         {
             "type": "audio",
-            "content": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            "content": "https://audio.jukehost.co.uk/xNax36k3LJMZue7NRsWkabHgmJwUHRmK",
+            "answer": "ceci est la réponse 2"
         },
         {
             "type": "picture",
-            "content": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            "content": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+            "answer": "ceci est la réponse 3"
         }
     ]
 }, {

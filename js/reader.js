@@ -1,4 +1,6 @@
 var json = undefined
+var currentGame = undefined
+var currentQuestion = undefined
 
 function initGame(file) {
     var reader = new FileReader();
@@ -14,6 +16,8 @@ function initGame(file) {
 function addGame(json) {
     const div = document.getElementById("cardZone")
     var i = 0
+
+    div.innerHTML = ""
 
     json.forEach(game => {
         div.innerHTML += '<div class="card" onclick="showQuestion(' + i + ')">\
@@ -32,6 +36,11 @@ function showQuestion(id) {
                     <div id="questionRule">' + json[id].rules + '</div>'
 
     div.style.top = "0%"
+    currentGame = json[id]
+    currentQuestion = 0
+
+    document.getElementById("previous").style.left = "-100%"
+    document.getElementById("next").style.right = "0%"
 }
 
 function hideQuestion() {
@@ -43,21 +52,37 @@ function hideQuestion() {
 function addPlayer() {
     var div = document.getElementById("playerZone")
 
-    div.innerHTML += '<div class="player">\
-                        <input type="text" class="name" value="Name" style="font-weight: bold; color: #c45118;">\
-                        <input type="text" class="score" value="0" style="font-size: 20px;">\
-                    </div>'
+    var newPlayer = document.createElement("div")
+    newPlayer.classList.add("player")
+    if (div.childElementCount == 0)
+        newPlayer.classList.add("current")
 
-    if (div.childElementCount == 1)
-        div.children[0].classList.add("current")
+    var newName = document.createElement("input")
+    newName.type = "text"
+    newName.classList.add("name")
+    newName.value = "Name"
+    newName.style.fontWeight = "bold"
+    newName.style.color = "#c45118"
+    newPlayer.appendChild(newName)
+
+    var newScore = document.createElement("input")
+    newScore.type = "text"
+    newScore.classList.add("score")
+    newScore.value = "0"
+    newScore.style.fontSize = "20px"
+    newPlayer.appendChild(newScore)
+
+    div.appendChild(newPlayer)
 }
 
 function removePlayer() {
     var div = document.getElementById("playerZone")
 
-    if (div.lastChild.classList.contains("current"))
-        nextPlayer()
-    div.removeChild(div.lastChild)
+    try {
+        if (div.lastChild.classList.contains("current"))
+            nextPlayer()
+        div.removeChild(div.lastChild)
+    } catch (e) {}
 }
 
 function nextPlayer() {
@@ -68,4 +93,29 @@ function nextPlayer() {
         next = div.firstElementChild
     current.classList.remove("current")
     next.classList.add("current")
+}
+
+function showContent(cursor) {
+    const card = document.getElementById("questionInner")
+    const prev = document.getElementById("previous")
+    const next = document.getElementById("next")
+
+    currentQuestion += cursor
+
+    card.innerHTML = '<div id="questionTitle">Question n°' + (currentQuestion) + '</div><div id="questionRule">'
+
+    switch (currentGame.content[currentQuestion - 1].type) {
+        case "text":
+            card.innerHTML += currentGame.content[currentQuestion - 1].content + '</div>'
+            break
+        case "picture":
+            card.innerHTML += '<img src="' + currentGame.content[currentQuestion - 1].content + '"></div>'
+            break
+        case "audio":
+            card.innerHTML += '<audio controls><source src="' + currentGame.content[currentQuestion - 1].content + '" type="audio/mpeg"></audio></div>'
+            break
+    }
+
+    if (currentQuestion <= 1) { prev.style.left = "-100%" } else { prev.style.left = "0%" }
+    if (currentQuestion >= currentGame.content.length) { next.style.right = "-100%" } else { next.style.right = "0%" }
 }

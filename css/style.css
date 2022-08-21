@@ -78,7 +78,7 @@ body {
     position: fixed;
     bottom: 0;
     display: flex;
-    max-width: 95%;
+    max-width: 90%;
 }
 
 .player {
@@ -176,6 +176,36 @@ input {
     max-height: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.slide {
+    position: absolute;
+    color: #f9844a;
+    border: solid #f9844a .3rem;
+    font-size: 2rem;
+    background-color: #f9c74f;
+    box-shadow: #f9844a 0px 7px 0px 0px;
+    transition-duration: .3s;
+    cursor: pointer;
+    height: 10%;
+}
+
+.slide:hover {
+    box-shadow: #f9844a 0px 0px 0px 0px;
+    transform: translateY(7px);
+}
+
+.previous {
+    left: -100%;
+    border-left: none;
+    border-radius: 0 1rem 1rem 0;
+    /* opacity: 0%; */
+}
+
+.next {
+    right: 0;
+    border-right: 0;
+    border-radius: 1rem 0 0 1rem;
 }
 
 #upload {
