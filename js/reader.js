@@ -20,10 +20,10 @@ function addGame(json) {
     div.innerHTML = ""
 
     json.forEach(game => {
-        div.innerHTML += '<div class="card" onclick="showQuestion(' + i + ')">\
-                            <div class="content">' + game.name + '</div>\
-                            <div class="type">' + game.type + '</div>\
-                        </div>'
+        div.innerHTML += `<div class="card" onclick="showQuestion(${i})">\
+                            <div class="content">${game.name}</div>\
+                            <div class="type">${game.type}</div>\
+                        </div>`
         i++
     });
 }
@@ -32,8 +32,8 @@ function showQuestion(id) {
     const div = document.getElementById("questionZone")
     const card = document.getElementById("questionInner")
 
-    card.innerHTML = '<div id="questionTitle">' + json[id].name + '</div>\
-                    <div id="questionRule">' + json[id].rules + '</div>'
+    card.innerHTML = `<div id="questionTitle">${json[id].name}</div>\
+                    <div id="questionRule">${json[id].rules}</div>`
 
     div.style.top = "0%"
     currentGame = json[id]
@@ -66,7 +66,7 @@ function addPlayer() {
     newPlayer.appendChild(newName)
 
     var newScore = document.createElement("input")
-    newScore.type = "text"
+    newScore.type = "number"
     newScore.classList.add("score")
     newScore.value = "0"
     newScore.style.fontSize = "20px"
@@ -102,24 +102,24 @@ function showContent(cursor) {
 
     currentQuestion += cursor
 
-    card.innerHTML = '<div id="questionTitle">Question n°' + (currentQuestion) + '</div>'
+    card.innerHTML = `<div id="questionTitle">Question n°${(currentQuestion)}</div>`
 
     if (currentGame.content[currentQuestion - 1].question != undefined)
-        card.innerHTML += '<div id="questionQuestion">' + currentGame.content[currentQuestion - 1].question + '</div>'
+        card.innerHTML += `<div id="questionQuestion">${currentGame.content[currentQuestion - 1].question}</div>`
 
     switch (currentGame.content[currentQuestion - 1].type) {
         case "text":
-            card.innerHTML += '<div id="questionRule">' + currentGame.content[currentQuestion - 1].content + '</div>'
+            card.innerHTML += `<div id="questionRule">${currentGame.content[currentQuestion - 1].content}</div>`
             break
         case "picture":
-            card.innerHTML += '<div id="questionRule"><img src="' + currentGame.content[currentQuestion - 1].content + '"></div>'
+            card.innerHTML += `<div id="questionRule"><img src="${currentGame.content[currentQuestion - 1].content}"></div>`
             break
         case "audio":
-            card.innerHTML += '<div id="questionRule"><audio controls><source src="' + currentGame.content[currentQuestion - 1].content + '" type="audio/mpeg"></audio></div>'
+            card.innerHTML += `<div id="questionRule"><audio controls><source src="${currentGame.content[currentQuestion - 1].content}" type="audio/mpeg"></audio></div>`
             break
     }
 
-    card.innerHTML += '<div id="questionAnswer" tabindex="0">' + currentGame.content[currentQuestion - 1].answer + '</div>'
+    card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion - 1].answer}</div>`
 
     if (currentQuestion <= 1) { prev.style.left = "-100%" } else { prev.style.left = "0%" }
     if (currentQuestion >= currentGame.content.length) { next.style.right = "-100%" } else { next.style.right = "0%" }

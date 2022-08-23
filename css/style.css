@@ -121,7 +121,9 @@ input {
 
 .player .name {}
 
-.player .score {}
+.player .score {
+    padding-left: 1rem;
+}
 
 #questionZone {
     position: fixed;
@@ -159,6 +161,10 @@ input {
     border: solid #f9844a .3rem;
 }
 
+#questionInner img {
+    width: 100%;
+}
+
 #questionTitle {
     color: #f9844a;
     position: absolute;
@@ -175,6 +181,8 @@ input {
     position: absolute;
     top: 5rem;
     font-size: 1.2rem;
+    /* width: 100%; */
+    text-align: center;
 }
 
 #questionQuestion:first-letter {
@@ -206,6 +214,9 @@ input {
     text-align: center;
     width: 95%;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.5rem;
 }
 
 #questionAnswer:first-letter {
@@ -214,6 +225,7 @@ input {
 
 #questionAnswer:focus {
     color: black;
+    height: fit-content;
 }
 
 .slide {
