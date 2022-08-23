@@ -102,19 +102,24 @@ function showContent(cursor) {
 
     currentQuestion += cursor
 
-    card.innerHTML = '<div id="questionTitle">Question n°' + (currentQuestion) + '</div><div id="questionRule">'
+    card.innerHTML = '<div id="questionTitle">Question n°' + (currentQuestion) + '</div>'
+
+    if (currentGame.content[currentQuestion - 1].question != undefined)
+        card.innerHTML += '<div id="questionQuestion">' + currentGame.content[currentQuestion - 1].question + '</div>'
 
     switch (currentGame.content[currentQuestion - 1].type) {
         case "text":
-            card.innerHTML += currentGame.content[currentQuestion - 1].content + '</div>'
+            card.innerHTML += '<div id="questionRule">' + currentGame.content[currentQuestion - 1].content + '</div>'
             break
         case "picture":
-            card.innerHTML += '<img src="' + currentGame.content[currentQuestion - 1].content + '"></div>'
+            card.innerHTML += '<div id="questionRule"><img src="' + currentGame.content[currentQuestion - 1].content + '"></div>'
             break
         case "audio":
-            card.innerHTML += '<audio controls><source src="' + currentGame.content[currentQuestion - 1].content + '" type="audio/mpeg"></audio></div>'
+            card.innerHTML += '<div id="questionRule"><audio controls><source src="' + currentGame.content[currentQuestion - 1].content + '" type="audio/mpeg"></audio></div>'
             break
     }
+
+    card.innerHTML += '<div id="questionAnswer" tabindex="0">' + currentGame.content[currentQuestion - 1].answer + '</div>'
 
     if (currentQuestion <= 1) { prev.style.left = "-100%" } else { prev.style.left = "0%" }
     if (currentQuestion >= currentGame.content.length) { next.style.right = "-100%" } else { next.style.right = "0%" }

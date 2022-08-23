@@ -9,8 +9,9 @@
         },
         {
             "type": "audio",
+            "question": "ceci est le titre de l'audio",
             "content": "https://audio.jukehost.co.uk/xNax36k3LJMZue7NRsWkabHgmJwUHRmK",
-            "answer": "ceci est la réponse 2"
+            "answer": "ceci est la réponse 2zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
         },
         {
             "type": "picture",

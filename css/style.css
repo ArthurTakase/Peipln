@@ -162,12 +162,23 @@ input {
 #questionTitle {
     color: #f9844a;
     position: absolute;
-    top: .3rem;
+    top: .5rem;
     font-size: 1.6rem;
     font-family: 'Pacifico', cursive;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+#questionQuestion {
+    color: #f9844a;
+    position: absolute;
+    top: 5rem;
+    font-size: 1.2rem;
+}
+
+#questionQuestion:first-letter {
+    text-transform: uppercase;
 }
 
 #questionRule {
@@ -176,6 +187,33 @@ input {
     max-height: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#questionRule:first-letter {
+    text-transform: uppercase;
+}
+
+#questionAnswer {
+    position: absolute;
+    bottom: 0;
+    border: solid #f9844a .2rem;
+    background-color: #f9b34a;
+    border-bottom: none;
+    padding: .5rem;
+    border-radius: 1rem 1rem 0 0;
+    color: #f9b34a;
+    transition-duration: .3s;
+    text-align: center;
+    width: 95%;
+    cursor: pointer;
+}
+
+#questionAnswer:first-letter {
+    text-transform: uppercase;
+}
+
+#questionAnswer:focus {
+    color: black;
 }
 
 .slide {
