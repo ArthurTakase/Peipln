@@ -2,6 +2,10 @@ var json = undefined
 var currentGame = undefined
 var currentQuestion = undefined
 
+/**
+ * Charge un jeu
+ * @param {Blob} file Le fichier JSON à lire
+ */
 function initGame(file) {
     var reader = new FileReader();
     reader.onload = function(evt) {
@@ -13,14 +17,18 @@ function initGame(file) {
     reader.readAsText(file);
 }
 
-function addGame(json) {
+/**
+ * Ajoute l'ensemble des jeux dans la page HTML
+ * @param {Array} games : Un tableau contenant une série de jeux 
+ */
+function addGame(games) {
     const div = document.getElementById("cardZone")
     var i = 0
 
     div.innerHTML = ""
 
-    json.forEach(game => {
-        div.innerHTML += `<div class="card" onclick="showQuestion(${i})">\
+    games.forEach(game => {
+        div.innerHTML += `<div class="card" onclick="showGame(${i})">\
                             <div class="content">${game.name}</div>\
                             <div class="type">${game.type}</div>\
                         </div>`
@@ -28,7 +36,11 @@ function addGame(json) {
     });
 }
 
-function showQuestion(id) {
+/**
+ * Affiche un jeu d'ID donné 
+ * @param {number} id L'ID du jeu (sa position dans le tableau de jeux)
+ */
+function showGame(id) {
     const div = document.getElementById("questionZone")
     const card = document.getElementById("questionInner")
 
@@ -43,12 +55,18 @@ function showQuestion(id) {
     document.getElementById("next").style.right = "0%"
 }
 
+/**
+ * Cache la zone de question
+ */
 function hideQuestion() {
     const div = document.getElementById("questionZone")
 
     div.style.top = "-100%"
 }
 
+/**
+ * Ajoute un joueur dans la liste des joueurs
+ */
 function addPlayer() {
     var div = document.getElementById("playerZone")
 
@@ -75,6 +93,9 @@ function addPlayer() {
     div.appendChild(newPlayer)
 }
 
+/**
+ * Supprime un joueur de la liste des joueurs
+ */
 function removePlayer() {
     var div = document.getElementById("playerZone")
 
@@ -85,6 +106,10 @@ function removePlayer() {
     } catch (e) {}
 }
 
+/**
+ * Passe le joueur actuel
+ * @returns 
+ */
 function nextPlayer() {
     var div = document.getElementById("playerZone")
     var current = div.getElementsByClassName("current")[0]
@@ -95,6 +120,10 @@ function nextPlayer() {
     next.classList.add("current")
 }
 
+/**
+ * Affiche une prochaine question
+ * @param {number} cursor Le nombre de question à passer
+ */
 function showContent(cursor) {
     const card = document.getElementById("questionInner")
     const prev = document.getElementById("previous")
