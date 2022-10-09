@@ -49,7 +49,7 @@ function showGame(id) {
 
     div.style.top = "0%";
     currentGame = json[id];
-    currentQuestion = 0;
+    currentQuestion = -1;
 
     document.getElementById("previous").style.left = "-100%";
     document.getElementById("next").style.right = "0%";
@@ -138,25 +138,31 @@ function showContent(cursor) {
 
     currentQuestion += cursor;
 
-    card.innerHTML = `<div id="questionTitle">Question n°${(currentQuestion)}</div>`;
+    card.innerHTML = `<div id="questionTitle">Question n°${(currentQuestion + 1)}</div>`;
 
-    if (currentGame.content[currentQuestion - 1].question != undefined)
-        card.innerHTML += `<div id="questionQuestion">${currentGame.content[currentQuestion - 1].question}</div>`;
+    if (currentGame.content[currentQuestion].question != undefined)
+        card.innerHTML += `<div id="questionQuestion">${currentGame.content[currentQuestion].question}</div>`;
 
-    switch (currentGame.content[currentQuestion - 1].type) {
+    switch (currentGame.content[currentQuestion].type) {
         case "text":
-            card.innerHTML += `<div id="questionRule">${currentGame.content[currentQuestion - 1].content}</div>`;
+            card.innerHTML += `<div id="questionRule">${currentGame.content[currentQuestion].content}</div>`;
             break;
         case "picture":
-            card.innerHTML += `<div id="questionRule"><img src="${currentGame.content[currentQuestion - 1].content}"></div>`;
+            card.innerHTML += `<div id="questionRule"><img src="${currentGame.content[currentQuestion].content}"></div>`;
             break;
         case "audio":
-            card.innerHTML += `<div id="questionRule"><audio controls><source src="${currentGame.content[currentQuestion - 1].content}" type="audio/mpeg"></audio></div>`;
+            card.innerHTML += `<div id="questionRule"><audio controls><source src="${currentGame.content[currentQuestion].content}" type="audio/mpeg"></audio></div>`;
             break;
     }
 
-    card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion - 1].answer}</div>`;
+    card.innerHTML += `<div id="responseBox">${
+    [...currentGame.content[currentQuestion].answers]
+    .sort(() => Math.random() - 0.5)
+    .map(response => `<div id="responseAnswer">${response}</div>`)
+    .reduce((prev, current) => prev + current, "")}</div>`;
 
-    if (currentQuestion <= 1) { prev.style.left = "-100%"; } else { prev.style.left = "0%"; }
-    if (currentQuestion >= currentGame.content.length) { next.style.right = "-100%"; } else { next.style.right = "0%"; }
+    card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion].answers[0]}</div>`;
+
+    if (currentQuestion < 1) { prev.style.left = "-100%"; } else { prev.style.left = "0%"; }
+    if (currentQuestion + 1 >= currentGame.content.length) { next.style.right = "-100%"; } else { next.style.right = "0%"; }
 }

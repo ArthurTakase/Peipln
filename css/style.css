@@ -13,6 +13,22 @@ body {
     background-color: #277da1;
 }
 
+#responseBox {
+    display: flex;
+    position: absolute;
+    top: 75%;
+}
+
+#responseAnswer {
+    background-color: #f9c74f;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: .5rem;
+    border: solid #f9844a .3rem;
+    margin: 0 0.5rem 0 0.5rem;
+}
+
 #title {
     position: fixed;
     top: 0;

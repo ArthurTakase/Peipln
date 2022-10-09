@@ -30,13 +30,13 @@ L'objet JSON représentant une partie est composé tel quel :
 ```json
 [
     {
-        "name": string,
-        "type": string,
-        "rules": string,
+        "name": "string",
+        "type": "string",
+        "rules": "string",
         "content": [
             {
                 "type": "text" | "picture" | "audio",
-                "answer": "string",
+                "answers": ["stringA", ...],
                 "question": "string",
                 "content": "string"
             },
@@ -63,4 +63,4 @@ Une question peut être de trois "type" :
 
 Une question est explicitée par son champ "question". Le champ "content" défini du texte supplémentaire à afficher au dessus de la question, pour définir par exemple les règles. Sinon, il est un lien URL ou un chemin relatif à la racine du serveur web menant vers la ressource à afficher.
 
-Le champ "answer" contient la réponse à la question.
+Le champ "answers" contient un tableau avec les différentes réponses possibles. La première réponse dans l'ordre du tableau est la bonne.
