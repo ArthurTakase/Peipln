@@ -3,6 +3,21 @@ var currentGame = undefined
 var currentQuestion = undefined
 
 /**
+ * Shuffle an array based on the Fisher-Yates Shuffle
+ * Source : https://github.com/surbhioberoi/fisher-yates-shuffle/blob/master/src/shuffle.js 
+ * @param {Array} array 
+ */
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const random = Math.floor(Math.random() * (array.length - 1));
+        const temp = array[random];
+        array[random] = array[i];
+        array[i] = temp;
+    }
+    return array;
+}
+
+/**
  * Charge un jeu
  * @param {Blob} file Le fichier JSON à lire
  */
@@ -28,9 +43,9 @@ function addGame(games) {
     div.innerHTML = "";
 
     games.forEach(game => {
-        div.innerHTML += `<div class="card" onclick="showGame(${i})">\
-                            <div class="content">${game.name}</div>\
-                            <div class="type">${game.type}</div>\
+        div.innerHTML += `<div class="card" onclick="showGame(${i})">
+                            <div class="content">${game.name}</div>
+                            <div class="type">${game.type}</div>
                         </div>`
         i++
     });
@@ -45,7 +60,11 @@ function showGame(id) {
     const card = document.getElementById("questionInner");
 
     card.innerHTML = `<div id="questionTitle">${json[id].name}</div>\
-                    <div id="questionRule">${json[id].rules}</div>`;
+                    <div id="questionRule">${json[id].rules}</div>
+                    <div id="randomizeBoxDiv">
+                        <input type="checkbox" id="randomizeBox" name="randomizeBox">
+                        <label for="randomizeBox">Questions au hasard?</label>
+                    </div>`;
 
     div.style.top = "0%";
     currentGame = json[id];
@@ -135,7 +154,7 @@ function showResponses() {
     const card = document.getElementById("questionInner");
     const numberToGive = parseInt(document.getElementById("numberOfAnswerInput").value);
     const goodResponse = currentGame.content[currentQuestion].answers[0];
-    const responseToShow = currentGame.content[currentQuestion].answers.slice(1).sort(() => Math.random() - 0.5).slice(0, numberToGive - 1);
+    const responseToShow = shuffleArray(currentGame.content[currentQuestion].answers.slice(1)).slice(0, numberToGive - 1);
     responseToShow.push(goodResponse);
 
     const oldResponseBox = document.getElementById("responseBox");
@@ -144,7 +163,7 @@ function showResponses() {
     }
 
     card.innerHTML += `<div id="responseBox">${
-    responseToShow
+    shuffleArray(responseToShow)
     .sort(() => Math.random() - 0.5)
     .map(response => `<div id="responseAnswer">${response}</div>`)
     .reduce((prev, current) => prev + current, "")
@@ -159,6 +178,11 @@ function showContent(cursor) {
     const card = document.getElementById("questionInner");
     const prev = document.getElementById("previous");
     const next = document.getElementById("next");
+
+    if(currentQuestion == -1 && document.getElementById("randomizeBox").checked) {
+        currentGame = structuredClone(currentGame);
+        shuffleArray(currentGame.content);
+    }
 
     currentQuestion += cursor;
 

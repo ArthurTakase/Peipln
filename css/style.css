@@ -345,3 +345,9 @@ input {
     transform: translateY(5px);
     box-shadow: #f9844a 0px 0px 0px 0px;
 }
+
+#randomizeBoxDiv {
+    display: flex;
+    position: absolute;
+    top: 75%;
+}
