@@ -128,6 +128,30 @@ function nextPlayer() {
 }
 
 /**
+ * Afficher un nombre de réponses donnée selon l'input "numberOfAnswerInput", de manière aléatoire
+ * 
+ */
+function showResponses() {
+    const card = document.getElementById("questionInner");
+    const numberToGive = parseInt(document.getElementById("numberOfAnswerInput").value);
+    const goodResponse = currentGame.content[currentQuestion].answers[0];
+    const responseToShow = currentGame.content[currentQuestion].answers.slice(1).sort(() => Math.random() - 0.5).slice(0, numberToGive - 1);
+    responseToShow.push(goodResponse);
+
+    const oldResponseBox = document.getElementById("responseBox");
+    if(oldResponseBox != null) {
+        oldResponseBox.remove();
+    }
+
+    card.innerHTML += `<div id="responseBox">${
+    responseToShow
+    .sort(() => Math.random() - 0.5)
+    .map(response => `<div id="responseAnswer">${response}</div>`)
+    .reduce((prev, current) => prev + current, "")
+    }</div>`;
+}
+
+/**
  * Affiche une prochaine question
  * @param {number} cursor Le nombre de question à passer
  */
@@ -155,11 +179,11 @@ function showContent(cursor) {
             break;
     }
 
-    card.innerHTML += `<div id="responseBox">${
-    [...currentGame.content[currentQuestion].answers]
-    .sort(() => Math.random() - 0.5)
-    .map(response => `<div id="responseAnswer">${response}</div>`)
-    .reduce((prev, current) => prev + current, "")}</div>`;
+    card.innerHTML += `<div id="numberOfResponse">
+    <div>Nombre de réponses à afficher</div>
+    <input type="number" id="numberOfAnswerInput" style="font-size:20px;">
+    <button type="button" onclick="showResponses()" id="numberOfAnswerButton">Afficher</button>
+    </div>`
 
     card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion].answers[0]}</div>`;
 

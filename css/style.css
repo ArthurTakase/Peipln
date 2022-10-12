@@ -13,6 +13,12 @@ body {
     background-color: #277da1;
 }
 
+#numberOfResponse {
+    position:absolute;
+    top:60%;
+    text-align: center;
+}
+
 #responseBox {
     display: flex;
     position: absolute;
@@ -325,6 +331,14 @@ input {
     box-shadow: #f9844a 0px 5px 0px 0px;
     cursor: pointer;
     transition-duration: .3s;
+}
+
+#numberOfAnswerButton {
+    color: #c45118;
+    background-color: #f9c74f;
+    border: solid #f9844a .2rem;
+    margin: .5rem;
+    cursor: pointer;
 }
 
 .settings:hover {
