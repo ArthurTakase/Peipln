@@ -1,6 +1,11 @@
-var json = undefined
-var currentGame = undefined
-var currentQuestion = undefined
+var json = undefined;
+var currentGame = undefined;
+var currentQuestion = undefined;
+var adminWindow = undefined;
+
+function openAdminWindow() {
+    adminWindow = window.open("","","popup");
+}
 
 /**
  * Shuffle an array based on the Fisher-Yates Shuffle
@@ -210,6 +215,12 @@ function showContent(cursor) {
     </div>`
 
     card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion].answers[0]}</div>`;
+
+    if(adminWindow != undefined) {
+        adminWindow.document.open();
+        adminWindow.document.write(`Réponse : ${currentGame.content[currentQuestion].answers[0]}`);
+        adminWindow.document.close();
+    }
 
     if (currentQuestion < 1) { prev.style.left = "-100%"; } else { prev.style.left = "0%"; }
     if (currentQuestion + 1 >= currentGame.content.length) { next.style.right = "-100%"; } else { next.style.right = "0%"; }
