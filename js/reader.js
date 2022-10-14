@@ -3,8 +3,41 @@ var currentGame = undefined;
 var currentQuestion = undefined;
 var adminWindow = undefined;
 
+/**
+ * Sauvegarde la liste des joueurs dans la mémoire du navigateur, si elle est non vide
+ */
+function savePlayers() {
+    const players = [...document.getElementsByClassName("player")]
+    .map(elem => ({
+        name : elem.getElementsByClassName("name")[0].value,
+        score : elem.getElementsByClassName("score")[0].value
+    }));
+    if(players.length > 0) {
+        localStorage.setItem("players", JSON.stringify(players));
+    }
+}
+
+/**
+ * Charge la liste des joueurs contenu dans la mémoire du navigateur, si présent
+ */
+function loadPlayers() {
+    const playerString = localStorage.getItem("players");
+    if(playerString != null) {
+        var div = document.getElementById("playerZone");
+        div.innerHTML = "";
+        JSON.parse(playerString).forEach(player => addPlayerWithData(player.name, player.score));
+    }
+}
+
+// Réalise une backup des joueurs toute les 30 secondes
+setInterval(savePlayers, 30000);
+
+/**
+ * Ouvre une pop-up qui sera destiné à afficher la réponse à la question de manière caché.
+ */
 function openAdminWindow() {
-    adminWindow = window.open("","","popup");
+    adminWindow = window.open("","Réponses","popup,width=300,height=100");
+    adminWindow.document.title = "Réponses";
 }
 
 /**
@@ -89,9 +122,11 @@ function hideQuestion() {
 }
 
 /**
- * Ajoute un joueur dans la liste des joueurs
+ * Ajoute un joueur avec les informations données
+ * @param {string} name Le nom du joueur
+ * @param {string} score Le score du joueur
  */
-function addPlayer() {
+function addPlayerWithData(name, score) {
     var div = document.getElementById("playerZone");
 
     var newPlayer = document.createElement("div");
@@ -102,7 +137,7 @@ function addPlayer() {
     var newName = document.createElement("input");
     newName.type = "text";
     newName.classList.add("name");
-    newName.value = "Name";
+    newName.value = name;
     newName.style.fontWeight = "bold";
     newName.style.color = "#c45118";
     newPlayer.appendChild(newName);
@@ -110,11 +145,18 @@ function addPlayer() {
     var newScore = document.createElement("input");
     newScore.type = "number";
     newScore.classList.add("score");
-    newScore.value = "0";
+    newScore.value = score;
     newScore.style.fontSize = "20px";
     newPlayer.appendChild(newScore);
 
     div.appendChild(newPlayer);
+}
+
+/**
+ * Ajoute un joueur dans la liste des joueurs
+ */
+function addPlayer() {
+    addPlayerWithData("Name", "0");
 }
 
 /**
