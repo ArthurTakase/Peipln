@@ -19,13 +19,13 @@ body {
     text-align: center;
 }
 
-#responseBox {
+#questionResponses {
     display: flex;
     position: absolute;
     top: 75%;
 }
 
-#responseAnswer {
+#responseText {
     background-color: #f9c74f;
     justify-content: center;
     align-items: center;
@@ -142,8 +142,6 @@ input {
     /* font-weight: bold; */
 }
 
-.player .name {}
-
 .player .score {
     padding-left: 1rem;
 }
@@ -184,8 +182,8 @@ input {
     border: solid #f9844a .3rem;
 }
 
-#questionInner img {
-    width: 100%;
+#questionImage > img {
+    height: 100%;
 }
 
 #questionTitle {
@@ -202,10 +200,9 @@ input {
 #questionQuestion {
     color: #f9844a;
     position: absolute;
-    top: 5rem;
-    font-size: 1.2rem;
-    /* width: 100%; */
+    font-size: 2rem;
     text-align: center;
+    top: 45%;
 }
 
 #questionQuestion:first-letter {
@@ -213,11 +210,10 @@ input {
 }
 
 #questionRule {
+    color: #f9844a;
     position: absolute;
-    max-width: 80%;
-    max-height: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 2rem;
+    text-align: center;
 }
 
 #questionRule:first-letter {
@@ -249,6 +245,19 @@ input {
 #questionAnswer:focus {
     color: black;
     height: fit-content;
+}
+
+#questionAudio {
+    position: absolute;
+    top:25%;
+}
+
+#questionImage {
+    position: absolute;
+    top:10%;
+    height:34%;
+    border: solid #f9844a .3rem;
+    border-radius: .5rem;
 }
 
 .slide {
@@ -346,8 +355,21 @@ input {
     box-shadow: #f9844a 0px 0px 0px 0px;
 }
 
+#randomizeBox {
+    width: auto;
+}
+
 #randomizeBoxDiv {
     display: flex;
     position: absolute;
     top: 75%;
+}
+
+#randomizeBoxLabel {
+    font-size: 20px;
+}
+
+#numberOfAnswerInput {
+    font-size: 20px;
+    width: auto;
 }

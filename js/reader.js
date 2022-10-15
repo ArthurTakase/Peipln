@@ -1,7 +1,35 @@
-var json = undefined;
+/// Utils
+
+/**
+ * Shuffle an array based on the Fisher-Yates Shuffle
+ * Source : https://github.com/surbhioberoi/fisher-yates-shuffle/blob/master/src/shuffle.js 
+ * @param {Array} array 
+ */
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const random = Math.floor(Math.random() * (array.length - 1));
+        const temp = array[random];
+        array[random] = array[i];
+        array[i] = temp;
+    }
+    return array;
+}
+
+//// Website data and functions
+
+// An array containing all the games
+var games = undefined;
+
+// The data of the current game
 var currentGame = undefined;
-var currentQuestion = undefined;
+
+// The current question index number
+var currentQuestionIndex = undefined;
+
+// The response window
 var adminWindow = undefined;
+
+/// Sauvegarde et chargement des joueurs
 
 /**
  * Sauvegarde la liste des joueurs dans la mémoire du navigateur, si elle est non vide
@@ -31,95 +59,6 @@ function loadPlayers() {
 
 // Réalise une backup des joueurs toute les 30 secondes
 setInterval(savePlayers, 30000);
-
-/**
- * Ouvre une pop-up qui sera destiné à afficher la réponse à la question de manière caché.
- */
-function openAdminWindow() {
-    adminWindow = window.open("","Réponses","popup,width=300,height=100");
-    adminWindow.document.title = "Réponses";
-}
-
-/**
- * Shuffle an array based on the Fisher-Yates Shuffle
- * Source : https://github.com/surbhioberoi/fisher-yates-shuffle/blob/master/src/shuffle.js 
- * @param {Array} array 
- */
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const random = Math.floor(Math.random() * (array.length - 1));
-        const temp = array[random];
-        array[random] = array[i];
-        array[i] = temp;
-    }
-    return array;
-}
-
-/**
- * Charge un jeu
- * @param {Blob} file Le fichier JSON à lire
- */
-function initGame(file) {
-    var reader = new FileReader();
-    reader.onload = function(evt) {
-        defaultJSON = JSON.parse(evt.target.result);
-        console.log(defaultJSON);
-        json = defaultJSON;
-        addGame(defaultJSON);
-    };
-    reader.readAsText(file);
-}
-
-/**
- * Ajoute l'ensemble des jeux dans la page HTML
- * @param {Array} games : Un tableau contenant une série de jeux 
- */
-function addGame(games) {
-    const div = document.getElementById("cardZone");
-    var i = 0;
-
-    div.innerHTML = "";
-
-    games.forEach(game => {
-        div.innerHTML += `<div class="card" onclick="showGame(${i})">
-                            <div class="content">${game.name}</div>
-                            <div class="type">${game.type}</div>
-                        </div>`
-        i++
-    });
-}
-
-/**
- * Affiche un jeu d'ID donné 
- * @param {number} id L'ID du jeu (sa position dans le tableau de jeux)
- */
-function showGame(id) {
-    const div = document.getElementById("questionZone");
-    const card = document.getElementById("questionInner");
-
-    card.innerHTML = `<div id="questionTitle">${json[id].name}</div>\
-                    <div id="questionRule">${json[id].rules}</div>
-                    <div id="randomizeBoxDiv">
-                        <input type="checkbox" id="randomizeBox" name="randomizeBox">
-                        <label for="randomizeBox">Questions au hasard?</label>
-                    </div>`;
-
-    div.style.top = "0%";
-    currentGame = json[id];
-    currentQuestion = -1;
-
-    document.getElementById("previous").style.left = "-100%";
-    document.getElementById("next").style.right = "0%";
-}
-
-/**
- * Cache la zone de question
- */
-function hideQuestion() {
-    const div = document.getElementById("questionZone");
-
-    div.style.top = "-100%";
-}
 
 /**
  * Ajoute un joueur avec les informations données
@@ -193,28 +132,111 @@ function nextPlayer() {
     next.classList.add("current");
 }
 
+/// Admin window
+
+/**
+ * Ouvre une pop-up qui sera destiné à afficher la réponse à la question de manière caché.
+ */
+function openAdminWindow() {
+    adminWindow = window.open("","Réponses","popup,width=300,height=100");
+    adminWindow.document.open();
+    adminWindow.document.write(`
+    <html>
+    <head>
+    <title>Réponses</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+    <div id="response"></div>
+    </body>
+    </html>
+    `);
+    adminWindow.document.close();
+}
+
+/// Game and question functions
+
+/**
+ * Charge un jeu
+ * @param {Blob} file Le fichier JSON à lire
+ */
+function initGame(file) {
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+        defaultJSON = JSON.parse(evt.target.result);
+        games = defaultJSON;
+        addGame(defaultJSON);
+    };
+    reader.readAsText(file);
+}
+
+/**
+ * Ajoute l'ensemble des jeux dans la page HTML
+ * @param {Array} games : Un tableau contenant une série de jeux 
+ */
+function addGame(games) {
+    const div = document.getElementById("cardZone");
+    var i = 0;
+
+    div.innerHTML = "";
+
+    games.forEach(game => {
+        div.innerHTML += `<div class="card" onclick="showGame(${i})">
+                            <div class="content">${game.name}</div>
+                            <div class="type">${game.type}</div>
+                        </div>`
+        i++
+    });
+}
+
+/**
+ * Affiche un jeu d'ID donné 
+ * @param {number} id L'ID du jeu (sa position dans le tableau de jeux)
+ */
+function showGame(id) {
+    const questionZone = document.getElementById("questionZone");
+    const questionInner = document.getElementById("questionInner");
+
+    questionInner.innerHTML = `<div id="questionTitle">${games[id].name}</div>\
+                    <div id="questionRule">${games[id].rules}</div>
+                    <div id="randomizeBoxDiv">
+                        <input type="checkbox" id="randomizeBox" name="randomizeBox">
+                        <label id="randomizeBoxLabel" for="randomizeBox">Questions au hasard?</label>
+                    </div>`;
+
+    questionZone.style.top = "0%";
+    currentGame = games[id];
+    currentQuestionIndex = -1;
+
+    document.getElementById("previous").style.left = "-100%";
+    document.getElementById("next").style.right = "0%";
+}
+
+/**
+ * Cache la zone de question
+ */
+function hideQuestion() {
+    const div = document.getElementById("questionZone");
+    div.style.top = "-100%";
+}
+
+
 /**
  * Afficher un nombre de réponses donnée selon l'input "numberOfAnswerInput", de manière aléatoire
  * 
  */
 function showResponses() {
-    const card = document.getElementById("questionInner");
-    const numberToGive = parseInt(document.getElementById("numberOfAnswerInput").value);
-    const goodResponse = currentGame.content[currentQuestion].answers[0];
-    const responseToShow = shuffleArray(currentGame.content[currentQuestion].answers.slice(1)).slice(0, numberToGive - 1);
+    const questionInner = document.getElementById("questionInner");
+    const numberOfResponse = parseInt(document.getElementById("numberOfAnswerInput").value);
+    const goodResponse = currentGame.content[currentQuestionIndex].answers[0];
+    const responseToShow = shuffleArray(currentGame.content[currentQuestionIndex].answers.slice(1)).slice(0, numberOfResponse - 1);
     responseToShow.push(goodResponse);
 
-    const oldResponseBox = document.getElementById("responseBox");
-    if(oldResponseBox != null) {
-        oldResponseBox.remove();
-    }
-
-    card.innerHTML += `<div id="responseBox">${
+    document.getElementById("questionResponses").innerHTML = 
     shuffleArray(responseToShow)
-    .sort(() => Math.random() - 0.5)
-    .map(response => `<div id="responseAnswer">${response}</div>`)
-    .reduce((prev, current) => prev + current, "")
-    }</div>`;
+    .map(response => `<div id="responseText">${response}</div>`)
+    .reduce((prev, current) => prev + current, "");
 }
 
 /**
@@ -222,48 +244,43 @@ function showResponses() {
  * @param {number} cursor Le nombre de question à passer
  */
 function showContent(cursor) {
-    const card = document.getElementById("questionInner");
+    const questionInner = document.getElementById("questionInner");
     const prev = document.getElementById("previous");
     const next = document.getElementById("next");
 
-    if(currentQuestion == -1 && document.getElementById("randomizeBox").checked) {
+    if(currentQuestionIndex == -1 && document.getElementById("randomizeBox").checked) {
         currentGame = structuredClone(currentGame);
         shuffleArray(currentGame.content);
     }
 
-    currentQuestion += cursor;
+    currentQuestionIndex += cursor;
 
-    card.innerHTML = `<div id="questionTitle">Question n°${(currentQuestion + 1)}</div>`;
+    questionInner.innerHTML = `<div id="questionTitle">Question n°${(currentQuestionIndex + 1)}</div>`;
 
-    if (currentGame.content[currentQuestion].question != undefined)
-        card.innerHTML += `<div id="questionQuestion">${currentGame.content[currentQuestion].question}</div>`;
+    if (currentGame.content[currentQuestionIndex].question != undefined)
+        questionInner.innerHTML += `<div id="questionQuestion">${currentGame.content[currentQuestionIndex].question}</div>`;
 
-    switch (currentGame.content[currentQuestion].type) {
-        case "text":
-            card.innerHTML += `<div id="questionRule">${currentGame.content[currentQuestion].content}</div>`;
-            break;
+    switch (currentGame.content[currentQuestionIndex].type) {
         case "picture":
-            card.innerHTML += `<div id="questionRule"><img src="${currentGame.content[currentQuestion].content}"></div>`;
+            questionInner.innerHTML += `<div id="questionImage"><img src="${currentGame.content[currentQuestionIndex].content}"></div>`;
             break;
         case "audio":
-            card.innerHTML += `<div id="questionRule"><audio controls><source src="${currentGame.content[currentQuestion].content}" type="audio/mpeg"></audio></div>`;
+            questionInner.innerHTML += `<div id="questionAudio"><audio controls src="${currentGame.content[currentQuestionIndex].content}"></audio></div>`;
             break;
     }
 
-    card.innerHTML += `<div id="numberOfResponse">
+    questionInner.innerHTML += `<div id="numberOfResponse">
     <div>Nombre de réponses à afficher</div>
-    <input type="number" id="numberOfAnswerInput" style="font-size:20px;">
+    <input type="number" id="numberOfAnswerInput">
     <button type="button" onclick="showResponses()" id="numberOfAnswerButton">Afficher</button>
     </div>`
 
-    card.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestion].answers[0]}</div>`;
+    questionInner.innerHTML += `<div id="questionResponses"></div>`;
+    questionInner.innerHTML += `<div id="questionAnswer" tabindex="0">${currentGame.content[currentQuestionIndex].answers[0]}</div>`;
 
-    if(adminWindow != undefined) {
-        adminWindow.document.open();
-        adminWindow.document.write(`Réponse : ${currentGame.content[currentQuestion].answers[0]}`);
-        adminWindow.document.close();
-    }
+    if(adminWindow != undefined)
+        adminWindow.document.getElementById("response").innerHTML = `Réponse : ${currentGame.content[currentQuestionIndex].answers[0]}`;
 
-    if (currentQuestion < 1) { prev.style.left = "-100%"; } else { prev.style.left = "0%"; }
-    if (currentQuestion + 1 >= currentGame.content.length) { next.style.right = "-100%"; } else { next.style.right = "0%"; }
+    if (currentQuestionIndex < 1) { prev.style.left = "-100%"; } else { prev.style.left = "0%"; }
+    if (currentQuestionIndex + 1 >= currentGame.content.length) { next.style.right = "-100%"; } else { next.style.right = "0%"; }
 }
