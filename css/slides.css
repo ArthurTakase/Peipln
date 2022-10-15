@@ -1,0 +1,51 @@
+.slide {
+    position: absolute;
+    color: #f9844a;
+    border: solid #f9844a .3rem;
+    font-size: 2rem;
+    background-color: #f9c74f;
+    transition-duration: .3s;
+    cursor: pointer;
+    top: 0;
+    box-shadow: none;
+    border-top: none;
+    width: 10%;
+    height: 2.5rem;
+}
+
+.slide:hover {
+    box-shadow: #f9844a 0px 0px 0px 0px;
+    transform: translateY(0px);
+}
+
+.previous {
+    left: -100%;
+    border-left: none;
+    border-radius: 0 0 1rem 0;
+}
+
+.next {
+    right: 0;
+    border-right: 0;
+    border-radius: 0 0 0 1rem;
+}
+
+#topLeftDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.topLeftButton {
+    font-family: 'Pacifico', cursive;
+    color: #f9c74f;
+    font-size: 30px;
+    margin: 10px;
+    opacity: .2;
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+.topLeftButton:hover {
+    opacity: 1;
+}
