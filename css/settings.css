@@ -1,0 +1,37 @@
+#settings {
+    position: fixed;
+    bottom: 5px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.3;
+    transition-duration: .3s;
+}
+
+#settings:hover {
+    opacity: 1;
+}
+
+.settings {
+    color: #c45118;
+    background-color: #f9c74f;
+    border: solid #f9844a .1rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin: .3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: #f9844a 0px 5px 0px 0px;
+    cursor: pointer;
+    transition-duration: .3s;
+}
+
+.settings:hover {
+    transform: translateY(5px);
+    box-shadow: #f9844a 0px 0px 0px 0px;
+}

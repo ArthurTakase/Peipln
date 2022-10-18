@@ -1,23 +1,24 @@
-<!-- basic html page -->
+<!DOCTYPE HTML>
 <html>
 
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/queries.css">
+    <title>PeipLn</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="js/reader.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/shortcut.js"></script>
 </head>
 
 <body>
 
-    <div id="title">Peipln</div>
+    <div id="title">PeipLn</div>
 
-    <label for="uploadlabel" title="Charger un jeu"><i id="upload" class='bx bx-upload'></i></label>
-    <input style="display: none;" type="file" id="uploadlabel" accept=".json,.peipln" onchange="initGame(this.files[0])">
-
+    <div id="topLeftDiv">
+        <label for="uploadlabel" title="Charger un jeu"><i class='topLeftButton bx bx-upload'></i></label>
+        <input style="display: none;" type="file" id="uploadlabel" accept=".json,.peipln" onchange="initGame(this.files[0])">
+        <label for="uploadlabel" title="Pop-up de la réponse"><i onclick="openAdminWindow()" class='topLeftButton bx bx-message-square-dots'></i></label>
+    </div>
 
     <div id="cardZone">
         Veuillez charger un jeu pour commencer
@@ -34,9 +35,11 @@
     </div>
 
     <div id="settings">
-        <button class="settings" onclick="addPlayer()">+</button>
-        <button class="settings" onclick="removePlayer()">-</button>
-        <button class="settings" onclick="nextPlayer()"><i class='bx bx-right-arrow-alt' ></i></button>
+        <label title="Ajouter un joueur"><button class="settings" onclick="addPlayer()">+</button></label>
+        <label title="Supprimer le joueur choisi"><button class="settings" onclick="removePlayer()">-</button></label>
+        <label title="Choisir le joueur suivant"><button class="settings" onclick="nextPlayer()"><i class='bx bx-right-arrow-alt' ></i></button></label>
+        <label title="Sauvegarder les joueurs"><button class="settings" onclick='savePlayers()'><i class='bx bx-save'></i></button></label>
+        <label title="Charger les joueurs"><button class="settings" onclick='loadPlayers()'><i class='bx bx-upload'></i></button></label>
     </div>
 
     <div id="playerZone"></div>

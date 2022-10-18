@@ -1,0 +1,50 @@
+#cardZone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-height: 80%;
+    overflow-y: scroll;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: .7rem 1rem .7rem 1rem;
+    margin: .3rem;
+    margin-bottom: .8rem;
+    cursor: pointer;
+    transition-duration: .3s;
+    text-align: center;
+    background-color: #f9c74f;
+    border-radius: .5rem;
+    box-shadow: #f9844a 0px 10px 0px 0px;
+    flex: 1 15%;
+    height: 3rem;
+    min-width: 15%;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(10px);
+    box-shadow: #f9844a 0px 0px 0px 0px;
+}
+
+.card .content {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card .type {
+    color: #c45118;
+    font-size: 14px;
+}
+
